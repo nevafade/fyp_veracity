@@ -1,0 +1,517 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head id="h">
+    <title>verality portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-responsive.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <style>
+      body {
+        padding-top: 100px;
+        background: url('{% static "pic4.jpg" %}') no-repeat center center fixed;
+        background-size: cover;
+      }
+      .progress{
+    width: 150px;
+    height: 150px;
+    line-height: 150px;
+    background: none;
+    margin: 0 auto;
+    box-shadow: none;
+    position: relative;
+}
+.backimage {
+    background: url('{% static "fakenewstilweb.png" %}') no-repeat center center fixed;
+    text-align: center;
+}
+.progress:after{
+    content: "";
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 12px solid #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.progress > span{
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+}
+.progress .progress-left{
+    left: 0;
+}
+.progress .progress-bar{
+    width: 100%;
+    height: 100%;
+    background: none;
+    border-width: 12px;
+    border-style: solid;
+    position: absolute;
+    top: 0;
+}
+.progress .progress-left .progress-bar{
+    left: 100%;
+    border-top-right-radius: 80px;
+    border-bottom-right-radius: 80px;
+    border-left: 0;
+    -webkit-transform-origin: center left;
+    transform-origin: center left;
+}
+.progress .progress-right{
+    right: 0;
+}
+.progress .progress-right .progress-bar{
+    left: -100%;
+    border-top-left-radius: 80px;
+    border-bottom-left-radius: 80px;
+    border-right: 0;
+    -webkit-transform-origin: center right;
+    transform-origin: center right;
+    animation: loading-1  1.8s linear forwards; }
+
+.progress .progress-value{
+    width: 90%;
+    height: 90%;
+    border-radius: 50%;
+    background: #44484b;
+    font-size: 24px;
+    color: #fff;
+    line-height: 135px;
+    text-align: center;
+    position: absolute;
+    top: 5%;
+    left: 5%;
+}
+.progress.blue .progress-bar{
+    border-color: #049dff;
+}
+.progress.blue .progress-left .progress-bar{
+    animation: loading-2 1.5s linear forwards 1.8s;
+}
+.progress.yellow .progress-bar{
+    border-color: #fdba04;
+}
+.progress.yellow .progress-left .progress-bar{
+    animation: loading-3 1s linear forwards 1.8s;
+}
+.progress.pink .progress-bar{
+    border-color: #ed687c;
+}
+.progress.pink .progress-left .progress-bar{
+    animation: loading-4 0.4s linear forwards 1.8s;
+}
+.progress.green .progress-bar{
+    border-color: #1abc9c;
+}
+.progress.green .progress-left .progress-bar{
+    animation: loading-5 1.2s linear forwards 1.8s;
+}
+.para{
+    width: 100%;
+    line-height: 1;
+    font-size: 15px;
+    /*opacity: 0.4;*/
+}
+.noleftborder {
+  border-left: 0px;
+}
+
+.team-title {
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  font-style: normal;
+  font-size: 85%;
+}
+
+.team-member {
+  text-align: center;
+  margin-bottom: 50px;
+}
+.sub_button{
+    width:100%;
+    line-height: 1;
+    font-size:45px;
+    opacity:0.4;
+    border-color:yellow;
+    border: solid;
+    border-width: 10px;
+}
+.sub_button:hover{
+    width:100%;
+    line-height: 1;
+    font-size:45px;
+    opacity:1;
+}
+#loading {
+    background: url('{% static "loading.gif" %}') no-repeat center center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 9999999;
+}
+
+@media only screen and (max-width: 990px){
+    .progress{ margin-bottom: 20px; }
+}
+
+@keyframes loading-1{
+    0%{
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100%{
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+}
+@keyframes loading-2{
+    0%{
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100%{
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+}
+
+
+
+    </style>
+    
+  </head>
+  <body>
+    <div class="container">
+      <div class="navbar navbar-fixed-top navbar-inverse">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">
+              <!--<img src="/static/logo.png" />-->
+              <i class="fa fa-newspaper"></i>
+              <span>Fake News Detection</span>
+            </a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li class="active" onclick="showVeracityChecker()"><a>Check Veracity</a></li>
+          <li onclick="showArticle()"><a>Fake News</a></li>
+          <li onclick="showDevInfo()"><a>About</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="https://c9.io" class="brand">Cloud9 IDE</a></li>
+        </ul>
+        <!--<div class="navbar-inner">-->
+        <!--  <div class="pull-right">-->
+        <!--    <a href="https://c9.io" class="brand">Cloud9 IDE</a>-->
+        <!--  </div>-->
+        <!--</div>-->
+      </div>
+      <div class="container">
+        <div id="loading" style="display:none;"></div>
+        <div id="check_verality_init">
+            <div class="backimage">
+                <img src="/static/logo.png" style="width:300px;"/>
+                <!--<h1>Detect the veracity of Fake News</h1>-->
+            </div>
+            <br><br><br>
+            <div class="row" >
+              <div class="col-sm-12 col-md-9 form-group">
+                <textarea class="form-control" style="line-height: 1;background:transparent;" rows="10" id="n_w"></textarea>
+              </div>
+              <div class="col-sm-12 col-md-3">
+                <div class="progress blue" id="progBlue">
+                    <span class="progress-left">
+                        <span class="progress-bar"></span>
+                    </span>
+                    <span class="progress-right">
+                        <span class="progress-bar"></span>
+                    </span>
+                    <div class="progress-value" id="progVal">o</div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-9 form-group">
+                    <span class="badge sub_button" type="submit" onclick="getVP()">Check Veracity</span><br><br><br>
+                </div>
+            </div>
+
+        </div>
+        <div class="row" id="article" style="display:none">
+            <div class="col-sm-12 col-md-12 form-group">
+                <span class="badge" style="width:100%;line-height: 1;font-size:20px;opacity:0.4;" >
+                <h1>Fake News: The dark side of digital revolution</h1>
+                <h3>By: Harsh Pamnani</h3>
+                <h4>Published in forbesindia.com</h4>
+                </span>
+            </div>
+            <div class="backimage">
+                <img src="/static/fake.jpg" />
+                <br><br>
+            </div>
+            <div class="col-sm-12 col-md-12 form-group">
+                <span class="badge para" >
+                <p style="white-space: pre-line;text-align: justify;">
+                    In the digital economy, producing and distributing content in form of blogs, music, pictures, videos and lists, has become quick, easy and cheap. People are writing millions of blogs and uploading videos on YouTube. Moreover companies like Google, Facebook, WhatsApp and Twitter act as catalysts that aggregate information from millions of sources to distribute it to billions of people. Day by day, smartphones and data is getting cheaper, enabling people to consume and distribute information as and when they find time. Digital revolution has made people more informed. With more information, they can make better decisions.
+                </p>
+                <p style="white-space: pre-line;text-align: justify;">
+                    But what if, this information becomes misinformation? False information can change the way people look at the world, can create doubts in their minds and mislead them to make the wrong choices. This is the negative side of the digital revolution, which is popularly now known as “fake news”. Fake news is fabricated news, which has no factual basis, but is packaged and presented as being factually accurate. Interestingly, technologies such as Photoshop, lip syncing, virtual reality and video editors can help create baseless facts. Once ready, social bots can help ensure fake news goes viral.
+                </p>
+                <p style="white-space: pre-line;text-align: justify;">
+                    There are several reasons fake news gets traction as real news. The fake news websites look exactly like trusted news sources. Facebook and Twitter's algorithm-driven newsfeed blurs the line between personal status updates, news articles and ads.
+                </p>
+                <p style="white-space: pre-line;text-align: justify;">
+                    User-created videos on Facebook and YouTube are not vetted before they reach a wide audience. Sometimes, evidence-free stories appear on Google News since the feed is basically created on the shear number of people reading it.
+                </p>
+                <p style="white-space: pre-line;text-align: justify;">
+                    WhatsApp messages and video forwards are circulated widely without anyone taking the time to check their veracity. That's how vulnerable people fall prey to fake news.
+                </p>
+                <p style="white-space: pre-line;text-align: justify;">
+                    Fake news such as, rumours of former Prime Minister Atal Bihari Vajpayee's death, involvement of the US Presidential election candidate Hillary Clinton in a child sex ring based out of a pizza restaurant, closure of messaging app Snapchat, Starbucks coupon offering people of colour a free drink, and so on, are a few examples that have caused emotional setbacks, reputational damage, monetary losses and brand image crisis.
+                </p>
+                <p style="white-space: pre-line;text-align: justify;">
+                    But why are there some people out there who create fake news at all. How do these "news" websites make money? Two most obvious answers to this question are page views and propaganda.
+                </p>
+                </span>
+            </div>
+            <div class="col-sm-12 col-md-12 form-group">
+                <h3 style="text-align: left;"><b>Page Views</b></h3>
+                <span class="badge para" >
+                <p style="white-space: pre-line;text-align: justify;">
+                    Blogs make money by selling ads. Each website has multiple ad units and is paid on the basis of the number of ad impressions. To get more ad impressions, websites need more page views. And for that they need content that would attract more clicks. For this, articles and blogs are created with catchy headlines on topics related to celebrity gossips, astrology, scandals, food, politics, movies, business, health, so on and so forth. To get more clicks, the content creation process has started slanting towards speed of content creation than accuracy of the content.
+                </p>
+                </span>
+            </div>
+            <div class="col-sm-12 col-md-12 form-group">
+                <h3 style="text-align: left;"><b>Propaganda</b></h3>
+                <span class="badge para" >
+                <p style="white-space: pre-line;text-align: justify;">
+                    Multiple bloggers are funded by an organisation with an agenda like, damaging the reputation of a brand or person, spreading hatred or violence, influencing voters during an election, creating noise around a subject, and so on.
+                </p>
+                <p style="white-space: pre-line;text-align: justify;">
+                    They focus on systematic multiplication of information reflecting the views around a concept, opinion or cause. These blogs spread through social bots and when people find something popular with many likes and shares, they take its veracity for granted and share it further. When a topic is trending on multiple channels, even reputed journalists, bloggers and influencers get misled and information from fake channels enters trusted channels. In this case, fake news creates doubts in the mind of the people and manipulates their perceptions.
+                </p>
+                <p style="white-space: pre-line;text-align: justify;">
+                    Marketers have always been aware and break their backs to get the right media coverage about their brands. They use social media channels, blogs and content marketing to gain mindshare. Now, they also need to be ready with their fire extinguishers, when fake news plagues their brands and stand to impact their customers’ trust. Few precautionary steps that marketers can take to combat fake news are as follows:
+                </p>
+                </span>
+            </div>
+            <div class="col-sm-12 col-md-12 form-group">
+                <h4 style="text-align: left;"><b>1. Ensure brands’ ads don’t appear on fake sites</b></h4>
+                <span class="badge para" >
+                <p style="white-space: pre-line;text-align: justify;">
+                    ‘You are known by the company you keep’. If a brand runs its advertisements on fake news websites, it's very easy to create wrong perceptions. Marketers need to direct their partner ad networks to not run their brands’ ads on fake news websites. Moreover, they should ask for and analyse ad networks’ reports to understand all the publications where their ads appear.
+                </p>
+                </span>
+            </div>
+            <div class="col-sm-12 col-md-12 form-group">
+                <h4 style="text-align: left;"><b>2. Set up alerts for online mentions of the brand</b></h4>
+                <span class="badge para" >
+                <p style="white-space: pre-line;text-align: justify;">
+                    Google Alerts notifies a person everytime their 'alert' word or news item is mentioned online. Setting a Google Alert or similar alerts for brands can help marketers stay on top of the news cycle and get notified immediately in case misleading information is being spread about their brand(s). Any delay can make it difficult to douse the fire.
+                </p>
+                </span>
+            </div>
+            <div class="col-sm-12 col-md-12 form-group">
+                <h4 style="text-align: left;"><b>3. Respond effectively when a fake news story breaks</b></h4>
+                <span class="badge para" >
+                <p style="white-space: pre-line;text-align: justify;">
+                    Marketers need to have a crisis communication and management plan in place for any untoward disaster. This will help in limiting the damage caused by fake news or any other crisis.
+                </p>
+                </span>
+            </div>
+            <div class="col-sm-12 col-md-12 form-group">
+                <h4 style="text-align: left;"><b>4. Develop relationships with reputable media channels</b></h4>
+                <span class="badge para" >
+                <p style="white-space: pre-line;text-align: justify;">
+                    When fake news about your brand, its product or leadership is being spread, a solid relationship with reputable news organisations and websites could help mitigating the risk and damage. Updates from trusted websites can add more credibility to marketers’ message around ignoring the fake news.
+                </p>
+                </span>
+            </div>
+            <div class="col-sm-12 col-md-12 form-group">
+                <h4 style="text-align: left;"><b>5. Educate employees, customers and partners</b></h4>
+                <span class="badge para" >
+                <p style="white-space: pre-line;text-align: justify;">
+                    From the word go, create the right messages to inform brand's employees, customers and partners, about the fake news. Keeping these shareholders in the loop will ensure there is no panic or confusion. The positive word might spread too, controlling the reputation damage.
+                </p>
+                <p style="white-space: pre-line;text-align: justify;">
+                    Chris Anderson, the author of internet classics – The Long Tail and Free, said, "Your brand isn’t what you say it is, it’s what Google says it is." In today’s era, the way IT (information technology) heads within a company take precautionary measures to avoid and mitigate security attacks, marketing heads need to take precautionary measures to avoid and mitigate the risk of fake news.
+                </p>
+                </span>
+            </div>
+        </div>
+        <div class="row" id="about" style="display:none">
+            <h1 id="about" style="text-align: center">About</h1>
+
+  <p><span class="row"></span></p>
+  <div class="col-md-1"></div>
+  <div class="text-left col-md-10 whitepane pane row">
+    <p>Fake News Detection is the result of efforts of 4 B.Tech Final year Computer Science students working on their B.Tech project. Our goals is to address the problem of fake news by identifying hoaxes and deliberate misinformation in news stories using machine learning, natural language processing and artificial intelligence.</p>
+  </div>
+
+  <p><span class="row"></span></p>
+
+  <p><br>
+  <br></p>
+
+  <h2 class="col-md-12 whitepane pane" id="advisors" style="text-align: center">Team Members</h2>
+  <p><br></p>
+
+  <blockquote class="team-member col-sm-4 noleftborder">
+    <p><img src="/static/aayu.jpg" alt="Aayush" height="192px" width="192px"></p>
+
+    <h4 id="aayush">Aayush</h4>
+    <p><em class="team-title">B.tech Final Year</em> <br>
+    <em class="team-title">Computer Science</em> <br></p>
+
+  </blockquote>
+
+  <blockquote class="team-member col-sm-4 noleftborder">
+    <p><img src="/static/samartha.jpg" alt="Samartha" height="192px" width="192px"></p>
+
+    <h4 id="samartha">Samartha Narang</h4>
+    <p><em class="team-title">B.tech Final Year</em> <br>
+    <em class="team-title">Computer Science</em> <br></p>
+
+  </blockquote>
+
+  <blockquote class="team-member col-sm-4 noleftborder">
+    <p><img src="/static/suchi.jpg" alt="Suchismita" height="192px" width="192px"></p>
+
+    <h4 id="suchi">Suchismita Banerjee</h4>
+    <p><em class="team-title">B.tech Final Year</em> <br>
+    <em class="team-title">Computer Science</em> <br></p>
+
+  </blockquote>
+
+  <blockquote class="team-member col-sm-4 noleftborder">
+    <p><img src="/static/beenil.jpg" alt="Beenil" height="192px" width="192px"></p>
+
+    <h4 id="beenil">Beenil</h4>
+    <p><em class="team-title">B.tech Final Year</em> <br>
+    <em class="team-title">Computer Science</em> <br></p>
+
+  </blockquote>
+
+  <p><span class="row"></span></p>
+        </div>
+      </div>
+      
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/angular.min.js"></script>
+    <script type="text/javascript">
+    
+    const fs = require('fs') 
+        
+    function showArticle(){
+        document.getElementById("article").style.display = "block";
+        document.getElementById("check_verality_init").style.display = "none";
+        document.getElementById("about").style.display = "none";
+    }
+    
+    function showDevInfo(){
+        document.getElementById("article").style.display = "none";
+        document.getElementById("check_verality_init").style.display = "none";
+        document.getElementById("about").style.display = "block";
+    }
+    
+    function showVeracityChecker(){
+        document.getElementById("article").style.display = "none";
+        document.getElementById("check_verality_init").style.display = "block";
+        document.getElementById("about").style.display = "none";
+    }
+    
+    
+    function getVP(){
+        var h = 0;
+        u_text= (document.getElementById("n_w").value);
+        if (u_text.indexOf('#') > -1)
+        {
+            h=1;
+            u_text= (document.getElementById("n_w").value).replace(/#/g,'');
+        }
+        alert(u_text);
+        //var u_text="In%20the%20run%20up%20to%20the%20Lok%20Sabha%20elections%20this%20year%2C%20the%20term%20vote%20bank%20politics%20has%20been%20used%20many%20times%20by%20politicians%2C%20journalists%2C%20election";
+        if(u_text==""){
+            alert('Enter some text!');
+        }else{
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "python?hastag="+h+"&text="+u_text, true);
+            
+            xhr.responseType = "text/javascript";
+            xhr.onreadystatechange = function(e){
+                document.getElementById("loading").style.display = "none";
+                if (this.readyState != 4){
+                    alert('loading.......');
+                }
+                
+            }
+            xhr.onload = function(e) {
+                document.getElementById("loading").style.display = "none";
+                alert(xhr.response);
+                var p = xhr.response
+                if(isNaN(p)){
+        	        document.getElementById("check_verality_init").innerHTML = p;
+        	        protocol(34)
+                }else{
+                    var b = Number(p)
+        	        protocol(b.toFixed(0),b.toFixed(2))
+                }
+            }
+            xhr.send();
+            // alert('request sent')
+            document.getElementById("loading").style.display = "block";
+        }
+        
+    }
+    
+    // function hideLoader() {
+    //     document.getElementById("loading").hide();
+    // }
+    
+    // $(window).ready(hideLoader);
+    
+    function protocol(b,v){
+      
+      var mx = document.getElementById("h").childNodes;
+      var sr = mx[13];
+      var st = mx[17];
+      var s = 0;
+      var k=0;
+      if(b<=50){
+        s = (b/100)*360;
+        k = 0;
+      }else{
+        s = 180;
+        k = (b/100)*360 - s;
+      }
+      var base = st.innerHTML.substring(0,3265);
+      var anim = "@keyframes loading-1{ 0%{ -webkit-transform: rotate(0deg); transform: rotate(0deg);}100%{-webkit-transform: rotate("+s+"deg);transform: rotate("+s+"deg);}}@keyframes loading-2{0%{ -webkit-transform: rotate(0deg); transform: rotate(0deg); } 100%{ -webkit-transform: rotate("+k+"deg); transform: rotate("+k+"deg);  }}";
+      
+      
+      st.innerHTML = base + anim ;
+      
+      document.getElementById("progBlue").innerHTML = "<span class=\"progress-left\"><span class=\"progress-bar\"></span> </span><span class=\"progress-right\">"
+                  + " <span class=\"progress-bar\"></span></span><div class=\"progress-value\" id=\"progVal\">90%</div>";
+      document.getElementById("progVal").innerHTML = ""+v+"%";
+      
+      
+    }
+    
+    
+    
+    </script>
+  </body>
+</html>

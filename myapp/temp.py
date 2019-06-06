@@ -1,0 +1,1 @@
+f = open('true_database_4_6_2019.csv')
